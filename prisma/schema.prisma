@@ -15,10 +15,48 @@ datasource db {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
+    id        String   @id @default(uuid())
     name      String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@index([name])
+}
+
+model User {
+    id        String   @id @default(uuid())
+    clerkId   String   @unique @db.VarChar(191)
+    isFarmer  Boolean  @default(false)
+    firstName String
+    lastName  String
+    email     String   @unique
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    deleted   Boolean  @default(false)
+}
+
+model Farm {
+    id        String   @id @default(uuid())
+    userId    String   @db.VarChar(191)
+    farmName  String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Inventory {
+    id          String   @id @default(uuid())
+    farmId      String   @db.VarChar(256)
+    name        String
+    description String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Order {
+    id          String   @id @default(uuid())
+    userId      String   @db.VarChar(191)
+    inventoryId String   @db.VarChar(256)
+    quantity    Int
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }

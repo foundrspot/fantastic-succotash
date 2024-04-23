@@ -10,7 +10,9 @@
     "dev": "next dev",
     "postinstall": "prisma generate",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "docker:start": "docker-compose up -d harvest_hub_db",
+    "docker:stop": "docker-compose stop harvest_hub_db"
   },
   "dependencies": {
     "@planetscale/database": "^1.16.0",
